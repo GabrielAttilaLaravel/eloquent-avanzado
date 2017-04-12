@@ -17,7 +17,18 @@ class CreateBooksTable extends Migration
 
             $table->text('title');
             $table->text('description');
-
+            //delete_at: para eliminar registros logicamente (si hay un registro en sta campo es eliminado logicamente)
+            // y lo buscamos con:
+            //      books::withTrashed()->find();
+            // buscamos todos los registros eliminados o no con:
+            //      books::withTrashed()->get();
+            // restauramos con:
+            //      $book = books::withTrashed()->find(1);
+            //      $book->restore();
+            // eliminamos fisicamente con:
+            //      $book = books::withTrashed()->find(1);
+            //      $book->foceDelete();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
