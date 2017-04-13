@@ -11,17 +11,10 @@
 |
 */
 
+use App\Category;
+
 Route::get('/', function () {
-    $books = \App\Books::get();
-    return view('destroy', compact('books'));
-});
+    $categories = Category::get();
 
-Route::delete('destroy', function (\Illuminate\Http\Request $request) {
-    $ids = $request->get('ids');
-
-    if (count($ids)){
-        \App\Books::destroy($ids);
-    }
-
-    return back();
+    return view('relacion', compact('categories'));
 });

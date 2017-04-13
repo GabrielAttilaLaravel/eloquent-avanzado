@@ -17,6 +17,10 @@ class CreateBooksTable extends Migration
 
             $table->text('title');
             $table->text('description');
+
+            $table->integer('category_id')->unsigned();
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+
             //delete_at: para eliminar registros logicamente (si hay un registro en sta campo es eliminado logicamente)
             // y lo buscamos con:
             //      books::withTrashed()->find();

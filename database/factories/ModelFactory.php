@@ -24,5 +24,6 @@ $factory->define(App\Books::class, function (Faker\Generator $faker) {
     return [
         'title' => $faker->text(20),
         'description' => $faker->text(rand(100, 255)),
+        'category_id' => $faker->randomElement([1, 2, 3])
     ];
 });
