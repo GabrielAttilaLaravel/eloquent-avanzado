@@ -14,7 +14,8 @@
 use App\Category;
 
 Route::get('/', function () {
-    $categories = Category::get();
+    // has: trae todas las categorias que tengan libros
+    $categories = Category::has('books')->get();
 
     return view('relacion', compact('categories'));
 });

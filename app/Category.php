@@ -10,4 +10,10 @@ class Category extends Model
     public function books(){
         return $this->hasMany(Books::class);
     }
+
+    // retornaremos el numero de libros que posee la categoria con esta funcion la cual se comporta como si
+    // fuese un atributo mas de la tabla
+    public function getNumBooksAttribute(){
+        return count($this->books);
+    }
 }

@@ -9,19 +9,17 @@
 </head>
 <body>
     @foreach($categories as $category)
-        @if(count($category->books)>0)
-            <p>
-                {{ $category->name }} ({{ count($category->books) }})
-            </p>
-            <ul>
-                @foreach($category->books as $book)
-                    <li>
-                        <strong>{{ $book->title }}:</strong>
-                        {{ $book->description }}
-                    </li>
-                @endforeach
-            </ul>
-        @endif
+        <p>
+            {{ $category->name }} ({{ $category->num_books }})
+        </p>
+        <ul>
+            @foreach($category->books as $book)
+                <li>
+                    <strong>{{ $book->title }}:</strong>
+                    {{ $book->description }}
+                </li>
+            @endforeach
+        </ul>
     @endforeach
 </body>
 </html>
