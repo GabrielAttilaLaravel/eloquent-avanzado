@@ -14,8 +14,11 @@
 use App\Category;
 
 Route::get('/', function () {
-    // has: trae todas las categorias que tengan libros
-    $categories = Category::has('books')->get();
+    // whereHas: nos permite añadir un segundo argumento para generar la consulta
+    // la cual trae todas las categorias que tengan libros y que sean publicas
+    $categories = Category::whereHas('books', function ($query){
+        $query->where('status', 'public');
+    })->get();
 
     return view('relacion', compact('categories'));
 });
