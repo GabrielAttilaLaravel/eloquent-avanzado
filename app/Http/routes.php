@@ -11,14 +11,20 @@
 |
 */
 
-use App\Category;
+use App\User;
 
 Route::get('/', function () {
-    // whereHas: nos permite añadir un segundo argumento para generar la consulta
-    // la cual trae todas las categorias que tengan libros y que sean publicas
-    $categories = Category::whereHas('books', function ($query){
-        $query->where('status', 'public');
-    })->get();
+    $users = User::all();
 
-    return view('relacion', compact('categories'));
+    return view('manytomany.index', compact('users'));
 });
+
+Route::get('edit-manytomany/{user_id}', [
+   'as' => 'getEdit',
+   'uses' => 'UserController@getEditManyToMany'
+]);
+
+Route::put('put-manytomany/{user_id}', [
+    'as' => 'putEdit',
+    'uses' => 'UserController@putEditManyToMany'
+]);

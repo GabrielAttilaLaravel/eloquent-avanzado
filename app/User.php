@@ -41,7 +41,11 @@ class User extends Model implements AuthenticatableContract,
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function books(){
+    public function manyBooks(){
         return $this->belongsToMany(Book::class);
+    }
+
+    public function getBooksAttribute(){
+        return $this->manyBooks ()->lists('book_id')->toArray();
     }
 }
