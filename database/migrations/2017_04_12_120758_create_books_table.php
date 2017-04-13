@@ -20,7 +20,9 @@ class CreateBooksTable extends Migration
             $table->enum('status', ['public', 'draft'])->default('draft');
 
             $table->integer('category_id')->unsigned();
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->foreign('category_id')->references('id')->on('categories')
+                  ->onDelete('cascade')
+                  ->onUpdate('cascade');
 
             //delete_at: para eliminar registros logicamente (si hay un registro en sta campo es eliminado logicamente)
             // y lo buscamos con:

@@ -8,7 +8,7 @@ class Category extends Model
 {
     // relacion hasMany (tiene muchos)
     public function books(){
-        return $this->hasMany(Books::class);
+        return $this->hasMany(Book::class);
     }
 
     // retornaremos el numero de libros que posee la categoria con esta funcion la cual se comporta como si
