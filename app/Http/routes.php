@@ -14,17 +14,12 @@
 use App\User;
 
 Route::get('/', function () {
-    $users = User::all();
+    // Query builder la usamos para consultas complejas para hacer mas optimo el sistema
+    $books = DB::table('categories')
+        ->join('books', 'categories.id', '=', 'books.category_id')
+        ->where('status', 'public')
+        ->select('categories.name as category', 'books.title' , 'books.description')
+        ->get();
 
-    return view('manytomany.index', compact('users'));
+    return view('querybuilder.index', compact('books'));
 });
-
-Route::get('edit-manytomany/{user_id}', [
-   'as' => 'getEdit',
-   'uses' => 'UserController@getEditManyToMany'
-]);
-
-Route::put('put-manytomany/{user_id}', [
-    'as' => 'putEdit',
-    'uses' => 'UserController@putEditManyToMany'
-]);
