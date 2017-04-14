@@ -11,20 +11,11 @@
 |
 */
 
-use App\User;
+use App\Book;
 
 Route::get('/', function () {
-    $user = User::find(1);
-
-    echo $user->name;
-    // usamos la variable que tiene la entidad y el metodo de relacion
-    foreach ($user->exams as $exam){
-        echo
-            '<li>'
-            . $exam->title
-            . ' - Nota: ' .$exam->pivot->score . ' pts.'
-            . ' - fecha: ' .$exam->pivot->created_at
-            .'</li>';
-
-    };
+    // para resolver el problema de N+1:
+    // with: muestra todos los libros con el nombre del metodo con la relacion
+    $books = Book::with('category', 'user')->get();
+    return view('home', compact('books'));
 });

@@ -24,6 +24,11 @@ class CreateBooksTable extends Migration
                   ->onDelete('cascade')
                   ->onUpdate('cascade');
 
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');;
+
             //delete_at: para eliminar registros logicamente (si hay un registro en sta campo es eliminado logicamente)
             // y lo buscamos con:
             //      books::withTrashed()->find();
