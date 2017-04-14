@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
@@ -17,6 +18,8 @@ class User extends Model implements AuthenticatableContract,
 {
     use Authenticatable, Authorizable, CanResetPassword;
 
+    // lo usamos para la eliminacion logica de los datos.
+    use SoftDeletes;
     /**
      * The database table used by the model.
      *
@@ -44,8 +47,14 @@ class User extends Model implements AuthenticatableContract,
     public function manyBooks(){
         return $this->belongsToMany(Book::class);
     }
+    // un usuario puede presentar muchos examenes (belongsToMany: tiene muchos)
+    public function exams(){
+        return $this->belongsToMany(Exam::class)
+            ->withPivot('score')
+            ->withTimestamps();
+    }
 
     public function getBooksAttribute(){
-        return $this->manyBooks ()->lists('book_id')->toArray();
+        return $this->manyBooks()->lists('book_id')->toArray();
     }
 }

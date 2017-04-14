@@ -3,9 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Category extends Model
 {
+    // lo usamos para la eliminacion logica de los datos.
+    use SoftDeletes;
+
     // relacion hasMany (tiene muchos)
     public function books(){
         return $this->hasMany(Book::class);

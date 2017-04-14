@@ -14,12 +14,17 @@
 use App\User;
 
 Route::get('/', function () {
-    // Query builder la usamos para consultas complejas para hacer mas optimo el sistema
-    $books = DB::table('categories')
-        ->join('books', 'categories.id', '=', 'books.category_id')
-        ->where('status', 'public')
-        ->select('categories.name as category', 'books.title' , 'books.description')
-        ->get();
+    $user = User::find(1);
 
-    return view('querybuilder.index', compact('books'));
+    echo $user->name;
+    // usamos la variable que tiene la entidad y el metodo de relacion
+    foreach ($user->exams as $exam){
+        echo
+            '<li>'
+            . $exam->title
+            . ' - Nota: ' .$exam->pivot->score . ' pts.'
+            . ' - fecha: ' .$exam->pivot->created_at
+            .'</li>';
+
+    };
 });
