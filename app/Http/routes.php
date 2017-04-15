@@ -12,20 +12,12 @@
 */
 
 
-use App\Post;
-use App\Video;
 
-Route::get('/', function () {
-    $post = Post::first();
-
-    echo 'POST: ' . $post->title;
-    foreach ($post->tags as $tag) {
-        echo '<li>' . $tag->title . '</li>';
-    }
-
-    $video = Video::first();
-    echo 'Video: ' . $video->title;
-    foreach ($video->tags as $tag) {
-        echo '<li>' . $tag->title . '</li>';
-    }
+Route::get('/', function ()
+{
+    return 'Done';
 });
+Route::get('user/{id}', [
+    'as'    => 'user',
+    'uses'  => 'UserController@getUser'
+]);
