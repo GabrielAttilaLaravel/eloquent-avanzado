@@ -20,18 +20,17 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\Book::class, function (Faker\Generator $faker) {
+
+$factory->define(App\Page::class, function (Faker\Generator $faker) {
     return [
-        'title' => $faker->text(20),
-        'description' => $faker->text(rand(100, 255)),
-        'status' => $faker->randomElement(['public', 'draft']),
-        'category_id' => $faker->randomElement([1, 2, 3]),
-        'user_id' => rand(1, 10)
+        'name' => $faker->name,
+        'body' => $faker->text,
     ];
 });
 
-$factory->define(App\Exam::class, function (Faker\Generator $faker) {
+$factory->define(App\Post::class, function (Faker\Generator $faker) {
     return [
         'title' => $faker->name,
+        'body' => $faker->text,
     ];
 });

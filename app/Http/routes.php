@@ -11,11 +11,13 @@
 |
 */
 
-use App\Book;
+use App\Page;
 
 Route::get('/', function () {
-    // para resolver el problema de N+1:
-    // with: muestra todos los libros con el nombre del metodo con la relacion
-    $books = Book::with('category', 'user')->get();
-    return view('home', compact('books'));
+    $page = Page::find(11);
+
+    echo $page->name;
+    foreach ($page->comments as $comment){
+        echo '<li>' . $comment->body . '</li>';
+    }
 });
